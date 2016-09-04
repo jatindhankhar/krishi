@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         button = (Button) findViewById(R.id.button);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
         button.setOnClickListener(handleClick);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,14 +53,10 @@ public class MainActivity extends AppCompatActivity
         });
 
         mResponseList = new ArrayList<DataModel>();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
+
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-
-
-
-        //button.setVisibility(View.GONE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -146,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
          if (id == R.id.nav_share) {
-
+             Toast.makeText(MainActivity.this, "Nav share was clicked!", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_send) {
 
         }
