@@ -3,6 +3,8 @@ package in.jatindhankhar.krishi;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -40,9 +42,23 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        button = (Button) findViewById(R.id.button);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
-        button.setOnClickListener(handleClick);
+        if(savedInstanceState == null)
+        {
+            Fragment fragment = null;
+            Class fragmentClass= null;
+            fragmentClass = MarketFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        }
+        //button = (Button) findViewById(R.id.button);
+        //mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        //button.setOnClickListener(handleClick);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,11 +68,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        mResponseList = new ArrayList<DataModel>();
+        //mResponseList = new ArrayList<DataModel>();
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
+        //mLayoutManager = new LinearLayoutManager(this);
+        //mRecyclerView.setLayoutManager(mLayoutManager);
+        //mRecyclerView.setHasFixedSize(true);
+        //mRecyclerView.animate();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -142,18 +159,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-         if (id == R.id.nav_share) {
-             Toast.makeText(MainActivity.this, "Nav share was clicked!", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_send) {
-
+        Fragment fragment = null;
+        Class fragmentClass = MarketFragment.class;
+        if (id == R.id.nav_camera) {
+            fragmentClass = MarketFragment.class;
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
-
     }
-
-    
 }

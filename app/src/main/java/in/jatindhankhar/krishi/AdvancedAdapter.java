@@ -55,6 +55,8 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
     {
         dataSet = data;
     }
+
+
     public AdvancedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_layout,parent,false);
