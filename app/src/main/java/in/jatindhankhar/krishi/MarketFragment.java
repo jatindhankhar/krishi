@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -53,6 +54,8 @@ public class MarketFragment extends Fragment {
         mResponseList = new ArrayList<DataModel>();
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Market Prices");
         Ion.with(getContext()).load("https://data.gov.in/api/datastore/resource.json?resource_id=9ef84268-d588-465a-a308-a864a43d0070&api-key=533060153c848cf636069b6cbcb3e841").
                 asJsonObject().setCallback(new FutureCallback<JsonObject>() {
             @Override

@@ -164,6 +164,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             fragmentClass = MarketFragment.class;
         }
+        else if (id == R.id.nav_gallery){
+            fragmentClass = SeedFragment.class;
+        }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
