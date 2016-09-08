@@ -1,5 +1,6 @@
 package in.jatindhankhar.krishi;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,7 +32,7 @@ import com.koushikdutta.ion.Ion;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener,ColdStoreFragment.OnFragmentInteractionListener {
     private Button button;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -168,6 +169,10 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_gallery){
             fragmentClass = SeedFragment.class;
         }
+        else if(id == R.id.nav_slideshow)
+        {
+            fragmentClass = ColdStoreFragment.class;
+        }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -185,5 +190,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void itemInteraction(DataModel dataModel) {
         Toast.makeText(MainActivity.this, dataModel.mcommodity, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

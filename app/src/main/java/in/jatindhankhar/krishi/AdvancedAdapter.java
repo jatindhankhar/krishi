@@ -43,6 +43,7 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
             TextView mMaxPrice;
             TextView mModalPrice;
             ImageView mCommodityIcon;
+            ImageView mBasketIcon;
             LinearLayout mContainer;
             final View mView;
         public ViewHolder(View itemView) {
@@ -51,7 +52,7 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
             //this.mState = (TextView) itemView.findViewById(R.id.state);
             this.mDistrict = (TextView) itemView.findViewById(R.id.district);
             this.mMarket = (TextView) itemView.findViewById(R.id.market);
-            //this.mCommodity = (TextView) itemView.findViewById(R.id.commodity);
+            this.mCommodity = (TextView) itemView.findViewById(R.id.commodity);
             //this.mVariety = (TextView) itemView.findViewById(R.id.variety);
             this.mArrivalDate = (TextView) itemView.findViewById(R.id.arrival_date);
             //this.mMinPrice = (TextView) itemView.findViewById(R.id.min_price);
@@ -59,6 +60,8 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
             this.mModalPrice = (TextView) itemView.findViewById(R.id.modal_price);
             this.mCommodityIcon = (ImageView) itemView.findViewById(R.id.commodity_icon);
             this.mContainer = (LinearLayout) itemView.findViewById(R.id.container_view);
+            this.mBasketIcon = (ImageView) itemView.findViewById(R.id.basket_icon);
+
 
 
 
@@ -101,8 +104,8 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
         //holder.mState.setText( "State: " +dataSet.get(position).mstate);
         holder.mDistrict.setText(dataSet.get(position).mdistrict);
         holder.mDistrict.setBackgroundColor(color1);
-        holder.mMarket.setText( "Market: " + dataSet.get(position).mmarket);
-        //holder.mCommodity.setText( "Commodity: " +dataSet.get(position).mcommodity);
+        holder.mMarket.setText(dataSet.get(position).mmarket);
+        holder.mCommodity.setText(dataSet.get(position).mcommodity);
         //holder.mVariety.setText( "Variety: " + dataSet.get(position).mvariety);
         SimpleDateFormat df = new SimpleDateFormat("dd MMM, yyyy");
         SimpleDateFormat dfInput = new SimpleDateFormat("dd/MM/yyyy");
@@ -113,6 +116,7 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
             e.printStackTrace();
         }
         holder.mArrivalDate.setText(releasedDate);
+        holder.mBasketIcon.setColorFilter(color1);
         //holder.mMinPrice.setText( "Min Price: " + "\u20B9"+ dataSet.get(position).mmin_price);
         //holder.mMaxPrice.setText( "Max Price: "+ "\u20B9" +dataSet.get(position).mmax_price);
         holder.mModalPrice.setText( dataSet.get(position).mmodal_price);

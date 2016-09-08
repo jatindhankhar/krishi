@@ -54,8 +54,7 @@ public class MarketFragment extends Fragment {
 
     public static MarketFragment newInstance()
     {
-        MarketFragment fragment = new MarketFragment();
-        return fragment;
+        return new MarketFragment();
     }
 
     @Nullable

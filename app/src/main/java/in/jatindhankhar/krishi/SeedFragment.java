@@ -40,9 +40,8 @@ public class SeedFragment extends Fragment {
 
 
     public static SeedFragment newInstance() {
-        SeedFragment fragment = new SeedFragment();
 
-        return fragment;
+        return new SeedFragment();
     }
 
     @Override
