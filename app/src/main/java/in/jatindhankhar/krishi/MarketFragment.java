@@ -30,14 +30,28 @@ public class MarketFragment extends Fragment {
     private ArrayList<DataModel> mResponseList;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    private itemInteractionListener mListener;
     public MarketFragment() {
 
     }
 
-    public void initData()
-    {
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof itemInteractionListener) {
+            mListener = (itemInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
     public static MarketFragment newInstance()
     {
         MarketFragment fragment = new MarketFragment();
@@ -72,7 +86,7 @@ public class MarketFragment extends Fragment {
 
                     }
                     //((ProgressBar)findViewById(R.id.progressBar)).setVisibility(View.GONE);
-                    mAdapter = new AdvancedAdapter(mResponseList);
+                    mAdapter = new AdvancedAdapter(mResponseList,mListener,getContext());
                     mRecyclerView.setAdapter(mAdapter);
 
                 }
@@ -94,6 +108,10 @@ public class MarketFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public interface itemInteractionListener{
+        void itemInteraction(DataModel dataModel);
     }
 
 }

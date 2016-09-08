@@ -31,7 +31,7 @@ import com.koushikdutta.ion.Ion;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener {
     private Button button;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
         }
         //button = (Button) findViewById(R.id.button);
         //mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity
 
                         }
                         ((ProgressBar)findViewById(R.id.progressBar)).setVisibility(View.GONE);
-                        mAdapter = new AdvancedAdapter(mResponseList);
+                        //mAdapter = new AdvancedAdapter(mResponseList);
                         mRecyclerView.setAdapter(mAdapter);
 
                     }
@@ -179,5 +180,10 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
 
+    }
+
+    @Override
+    public void itemInteraction(DataModel dataModel) {
+        Toast.makeText(MainActivity.this, dataModel.mcommodity, Toast.LENGTH_SHORT).show();
     }
 }
