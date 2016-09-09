@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:tag="cards main container">
-
+    android:id="@+id/container_view"
+    >
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -13,35 +11,172 @@
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="#FFFFFF"
         card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="0dp"
-        card_view:cardMaxElevation="0dp"
+        card_view:cardElevation="1dp"
+        card_view:cardMaxElevation="10dp"
         card_view:cardPreventCornerOverlap="false"
         card_view:cardUseCompatPadding="true">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/name_image"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/ic_farm"
-                />
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Company name"
-                android:id="@+id/company_name"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+                android:text="District"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:id="@+id/district"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:background="@color/colorAccent"
 
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_gravity="left|start"
+                    android:layout_alignBottom="@+id/details_wrap"
+                    android:layout_alignTop="@+id/details_wrap"
+                    android:id="@+id/company_name_icon"
+                    android:padding="10dp"
+                    />
 
+                <TableLayout
+                    android:id="@+id/details_wrap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/company_name_icon"
+                    android:layout_toEndOf="@+id/company_name_icon">
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        >
+                        <ImageView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_people"
+
+                            />
+                        <TextView
+                            android:text="Name"
+                            android:id="@+id/person_name"
+                            android:textSize="24dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingStart="10dp"
+                            />
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        >
+                        <ImageView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_building"
+
+                            />
+                        <TextView
+                            android:text="Company Name"
+                            android:id="@+id/company_name"
+                            android:textSize="24dp"
+                            android:ellipsize="marquee"
+                            android:layout_width="wrap_content"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:paddingLeft="10dp"
+                            android:paddingStart="10dp"
+                            android:layout_marginRight="10dp"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <ImageView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_location"
+
+                            />
+                        <TextView
+                            android:text="Block"
+                            android:id="@+id/block"
+                            android:paddingLeft="10dp"
+                            android:paddingStart="10dp"
+                            android:textSize="24dp"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <ImageView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_phone_default"
+                            android:id="@+id/phone_icon"
+                            />
+                        <TextView
+                            android:text="Number"
+                            android:id="@+id/phone_number"
+                            android:textSize="24dp"
+                            android:layout_width="wrap_content"
+                            android:paddingStart="10dp"
+                            android:paddingLeft="10dp"
+                            android:autoLink="phone"
+                            android:textColorLink="@color/colorPrimary"
+                            android:textStyle="bold"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <ImageView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/authority"
+
+                            />
+                        <TextView
+                            android:text="Authority"
+                            android:id="@+id/authority"
+                            android:textSize="24dp"
+                            android:paddingStart="10dp"
+                            android:paddingLeft="10dp"
+                            />
+                    </TableRow>
+                    <TableRow>
+                        <ImageView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/basket"
+
+                            />
+                        <TextView
+                            android:text="Seed Type"
+                            android:id="@+id/seed_type"
+                            android:textSize="24sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:paddingStart="10dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingEnd="10dp"
+                            />
+                    </TableRow>
+
+                </TableLayout>
+            </RelativeLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

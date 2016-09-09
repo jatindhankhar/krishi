@@ -55,7 +55,9 @@ public class ColdStoreAdapter extends RecyclerView.Adapter<ColdStoreAdapter.View
                 .buildRoundRect(dataSet.get(position).store_name.substring(0,1),color1,160);
         holder.mDistrict.setText(dataSet.get(position).district);
         holder.mDistrict.setBackgroundColor(color1);
-        holder.mState.setText(dataSet.get(position).state);
+        String state = dataSet.get(position).state.toLowerCase();
+        state = Character.toString(state.charAt(0)).toUpperCase() + state.substring(1);
+        holder.mState.setText(state);
         holder.mStoreName.setText(dataSet.get(position).store_name);
         holder.mName.setText(dataSet.get(position).name);
         holder.mStoreIcon.setImageDrawable(textDrawable);
@@ -69,7 +71,7 @@ public class ColdStoreAdapter extends RecyclerView.Adapter<ColdStoreAdapter.View
         else
         {
             holder.mPhoneIcon.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.ic_phone_default));
-            holder.mNumber.setText("+91" +dataSet.get(position).number);
+            holder.mNumber.setText("+91" +phoneNumber);
             //holder.mNumber.setAutoLinkMask(Linkify.PHONE_NUMBERS);
         }
 

@@ -147,6 +147,17 @@ public class SeedModel {
         }
     }
 
+    public class LicenseDetails {
+        @SerializedName("license_authority")
+        private String licenseAuthority;
+        @SerializedName("membership")
+        private String membership;
+        public String getLicenseAuthority() { return licenseAuthority;}
+        public  void setLicenseAuthority(String licenseAuthority) { this.licenseAuthority = licenseAuthority ;}
+        public String getMembership() { return  membership;}
+        public void setMembership(String membership){this.membership = membership;}
+    }
+
     @SerializedName("crop_details")
     CropDetails cropDetails;
 
@@ -159,6 +170,9 @@ public class SeedModel {
 
     @SerializedName("address_details")
     AddressDetails addressDetails;
+
+    @SerializedName("license_details")
+    LicenseDetails licenseDetails;
 
 }
 

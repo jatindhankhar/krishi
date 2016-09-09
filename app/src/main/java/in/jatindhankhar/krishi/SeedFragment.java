@@ -72,7 +72,7 @@ public class SeedFragment extends Fragment {
                             {
                                 mResponseList.add(gson.fromJson(el,SeedModel.class));
                             }
-                            mAdapter = new SeedAdapter(mResponseList);
+                            mAdapter = new SeedAdapter(mResponseList,getContext());
                             mRecyclerView.setAdapter(mAdapter);
                         }
                         else

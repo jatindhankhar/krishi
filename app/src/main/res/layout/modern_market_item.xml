@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardBackgroundColor="#FFFFFF"
-        card_view:cardCornerRadius="5dp"
+        card_view:cardCornerRadius="10dp"
         card_view:cardElevation="1dp"
         card_view:cardMaxElevation="10dp"
         card_view:cardPreventCornerOverlap="false"
@@ -54,6 +54,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/commodity_icon"
                     android:layout_toEndOf="@+id/commodity_icon">
@@ -70,7 +72,9 @@
                             android:text="Rohtak"
                             android:id="@+id/market"
                             android:textSize="24dp"
+                            android:layout_width="wrap_content"
                             android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
                             android:paddingStart="10dp"
                             />
                     </TableRow>

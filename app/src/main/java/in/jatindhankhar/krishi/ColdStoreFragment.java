@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -59,11 +60,11 @@ public class ColdStoreFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view =  inflater.inflate(R.layout.fragment_cold_store, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.cold_store_list);
-        //recyclerView.setHasFixedSize(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Cold Storage");
         mResponseList = new ArrayList<ColdStoreModel>();
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
-        Ion.with(getContext()).load("http://krishi.jatindhankhar.in/coldstore?state=haryana").asJsonArray().setCallback(
+        Ion.with(getContext()).load("http://krishi.jatindhankhar.in/coldstore?state=delhi").asJsonArray().setCallback(
                 new FutureCallback<JsonArray>() {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
