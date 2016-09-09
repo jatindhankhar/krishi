@@ -71,11 +71,11 @@ public class ColdStoreFragment extends Fragment {
                         if (e == null) {
                             Gson gson = new Gson();
                             for (JsonElement el : result) {
-                                //mResponseList.add(gson.fromJson(el, ColdStoreModel.class));
-                                ColdStoreModel c = gson.fromJson(el,ColdStoreModel.class);
-                                Log.d("Yolopad",c.number);
+                                mResponseList.add(gson.fromJson(el, ColdStoreModel.class));
+                                //ColdStoreModel c = gson.fromJson(el,ColdStoreModel.class);
+                                //Log.d("Yolopad",c.number);
                             }
-                            //mAdapter = new SeedAdapter(mResponseList);
+                            mAdapter = new ColdStoreAdapter(mResponseList,getContext(),mListener);
                             mRecyclerView.setAdapter(mAdapter);
                         } else {
                             Toast.makeText(getContext(), "Sorry, there was some error :(", Toast.LENGTH_SHORT).show();
@@ -88,11 +88,7 @@ public class ColdStoreFragment extends Fragment {
     }
 
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -123,6 +119,6 @@ public class ColdStoreFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
 
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(ColdStoreModel coldStoreModel);
     }
 }

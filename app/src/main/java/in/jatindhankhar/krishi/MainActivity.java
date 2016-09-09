@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(ColdStoreModel coldStoreModel) {
+        Toast.makeText(MainActivity.this, coldStoreModel.store_name, Toast.LENGTH_SHORT).show();
     }
 }
