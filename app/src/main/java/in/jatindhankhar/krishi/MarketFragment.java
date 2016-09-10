@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -63,10 +65,29 @@ public class MarketFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view =  inflater.inflate(R.layout.market_fragment, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.market_list);
-        //recyclerView.setHasFixedSize(true);
-        mResponseList = new ArrayList<DataModel>();
+        mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
+        FloatingSearchView floatingSearchView = (FloatingSearchView) getActivity().findViewById(R.id.floating_search_view);
+        floatingSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
+                String query = newQuery.toLowerCase();
+                final ArrayList<DataModel> filteredList = new ArrayList<DataModel>();
+                for(DataModel el : mResponseList)
+                {
+                    if(el.mcommodity.toLowerCase().contains(query))
+                    {
+                        filteredList.add(el);
+                    }
+                    mAdapter = new AdvancedAdapter(filteredList,mListener,getContext());
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+
+            }
+        });
+        mResponseList = new ArrayList<DataModel>();
+
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Market Prices");
         Ion.with(getContext()).load("https://data.gov.in/api/datastore/resource.json?resource_id=9ef84268-d588-465a-a308-a864a43d0070&api-key=533060153c848cf636069b6cbcb3e841").

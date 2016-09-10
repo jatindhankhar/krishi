@@ -148,6 +148,13 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
     public int getItemCount() {
         return dataSet.size();
     }
+
+    public void updateDataSet(ArrayList<DataModel> dm)
+    {
+     dataSet.clear();
+        dataSet.addAll(dm);
+        notifyDataSetChanged();
+    }
 }
 
 

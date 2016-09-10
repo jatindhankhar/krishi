@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity
         //mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
         //button.setOnClickListener(handleClick);
         floatingSearchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
+        /*floatingSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
+                Toast.makeText(MainActivity.this, newQuery, Toast.LENGTH_SHORT).show();
+            }
+        }); */
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,22 +83,25 @@ public class MainActivity extends AppCompatActivity
                 if(!searchEnabled)
                 {
                     assert toolbar != null;
+                    toolbar.animate().alpha(0.0f).setDuration(600);
                     toolbar.setVisibility(View.GONE);
+                    floatingSearchView.animate().alpha(1.0f);
                     floatingSearchView.setVisibility(View.VISIBLE);
                     fab.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,R.drawable.ic_clear));
                     fab.animate().rotation(180)
-                            .setDuration(1000)
+                            .setDuration(600)
                             .start();
                     searchEnabled = true;
                 }
                 else
                 {
-
+                    floatingSearchView.animate().alpha(0.0f).setDuration(600);
                     floatingSearchView.setVisibility(View.GONE);
                     assert toolbar != null;
+                    toolbar.animate().alpha(1.0f);
                     toolbar.setVisibility(View.VISIBLE);
                     fab.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,R.drawable.ic_search));
-                    fab.animate().rotation(0).setDuration(1000).start();
+                    fab.animate().rotation(0).setDuration(600).start();
                     searchEnabled = false;
 
                 }
