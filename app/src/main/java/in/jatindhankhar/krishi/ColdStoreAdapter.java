@@ -39,7 +39,7 @@ public class ColdStoreAdapter extends RecyclerView.Adapter<ColdStoreAdapter.View
 
     @Override
     public ColdStoreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cold_store_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cold_store_item_alt,parent,false);
         ViewHolder myViewHolder = new ViewHolder(view);
         return myViewHolder;
     }

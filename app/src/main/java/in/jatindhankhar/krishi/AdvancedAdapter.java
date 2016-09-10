@@ -86,7 +86,7 @@ public class AdvancedAdapter extends RecyclerView.Adapter<AdvancedAdapter.ViewHo
 
     public AdvancedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.modern_market_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.modern_market_item_alt,parent,false);
         ViewHolder myViewHolder = new ViewHolder(view);
         return myViewHolder;
     }
