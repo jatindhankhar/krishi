@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/sort_commodity"
+        app:icon="@drawable/ic_phone_default"
+        android:checked="true"
+        android:title="By Commodity" />
+    <item
+        android:id="@+id/sort_district"
+        android:icon="@drawable/ic_people"
+        android:title="By District" />
+
+    <item
+        android:id="@+id/sort_state"
+        android:icon="@drawable/basket"
+        android:title="By State" />
+
+
+</menu>
