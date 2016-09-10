@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -38,10 +40,12 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<DataModel> mResponseList;
+    private FloatingSearchView floatingSearchView;
+    private boolean searchEnabled = false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(savedInstanceState == null)
         {
@@ -61,12 +65,38 @@ public class MainActivity extends AppCompatActivity
         //button = (Button) findViewById(R.id.button);
         //mRecyclerView = (RecyclerView) findViewById(R.id.recycleview);
         //button.setOnClickListener(handleClick);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        floatingSearchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //toolbar.setVisibility(View.GONE);
+                //((FloatingSearchView) (findViewById(R.id.floating_search_view))).setVisibility(View.VISIBLE);
+                //fab.hide();
+                if(!searchEnabled)
+                {
+                    assert toolbar != null;
+                    toolbar.setVisibility(View.GONE);
+                    floatingSearchView.setVisibility(View.VISIBLE);
+                    fab.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,R.drawable.ic_clear));
+                    fab.animate().rotation(180)
+                            .setDuration(1000)
+                            .start();
+                    searchEnabled = true;
+                }
+                else
+                {
+
+                    floatingSearchView.setVisibility(View.GONE);
+                    assert toolbar != null;
+                    toolbar.setVisibility(View.VISIBLE);
+                    fab.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,R.drawable.ic_search));
+                    fab.animate().rotation(0).setDuration(1000).start();
+                    searchEnabled = false;
+
+                }
+
             }
         });
 
