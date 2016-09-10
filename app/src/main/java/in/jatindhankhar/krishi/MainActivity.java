@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(MainActivity.this, newQuery, Toast.LENGTH_SHORT).show();
             }
         }); */
+
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {

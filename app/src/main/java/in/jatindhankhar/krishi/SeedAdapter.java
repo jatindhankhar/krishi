@@ -32,7 +32,7 @@ public class SeedAdapter extends RecyclerView.Adapter<SeedAdapter.ViewHolder> {
     }
     @Override
     public SeedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.seed_item_layout,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.seed_item_layout_alt,parent,false);
         ViewHolder myViewHolder = new ViewHolder(view);
         return myViewHolder;
     }
