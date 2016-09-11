@@ -17,8 +17,8 @@
             android:title="Cold Storage" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Scan Aadahr" />
+            android:icon="@drawable/barcode_scan"
+            android:title="Scan Aadhar" />
     </group>
     <item android:title="Communicate">
         <menu>

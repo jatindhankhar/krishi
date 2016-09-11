@@ -40,4 +40,6 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.github.arimorty:floatingsearchview:2.0.3'
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0'
+
 }
