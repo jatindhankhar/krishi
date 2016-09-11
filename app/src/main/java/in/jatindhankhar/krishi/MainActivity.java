@@ -34,7 +34,7 @@ import com.koushikdutta.ion.Ion;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener,ColdStoreFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener,ColdStoreFragment.OnFragmentInteractionListener,MarketFragment.floatingSearchBarListenrer {
     private Button button;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -236,5 +236,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(ColdStoreModel coldStoreModel) {
         Toast.makeText(MainActivity.this, coldStoreModel.store_name, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void configureSearch() {
+
     }
 }

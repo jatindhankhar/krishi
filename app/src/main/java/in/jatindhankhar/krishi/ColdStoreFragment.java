@@ -3,17 +3,21 @@ package in.jatindhankhar.krishi;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -37,7 +41,7 @@ public class ColdStoreFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private OnFragmentInteractionListener mListener;
-
+    private int defaultId = R.id.sort_commodity;
     public ColdStoreFragment() {
         // Required empty public constructor
     }
@@ -50,6 +54,59 @@ public class ColdStoreFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FloatingSearchView floatingSearchView = (FloatingSearchView) getActivity().findViewById(R.id.floating_search_view);
+        floatingSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
+                String query = newQuery.toLowerCase();
+                final ArrayList<ColdStoreModel> filteredList = new ArrayList<ColdStoreModel>();
+                if(query.isEmpty() || query.trim().isEmpty())
+                {
+                    filteredList.addAll(mResponseList);
+                }
+                else {
+                    for (ColdStoreModel el : mResponseList) {
+                        String query_field = el.store_name;
+                        switch (defaultId)
+                        {
+                            case R.id.sort_commodity :
+                                query_field = el.store_name;
+                                break;
+                            case  R.id.sort_district:
+                                query_field = el.district;
+                                break;
+                            case R.id.sort_state:
+                                query_field = el.state;
+                                break;
+                            default:
+                                query_field = el.store_name;
+                        }
+                        if (query_field.toLowerCase().contains(query)) {
+                            filteredList.add(el);
+                        }
+                        mAdapter = new ColdStoreAdapter(filteredList, getContext(),mListener);
+                        mRecyclerView.setAdapter(mAdapter);
+                        FloatingActionButton fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+                        if(mAdapter.getItemCount() > 0) {
+                            fab.animate().rotation(0).start();
+                            fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_check));
+                        }
+                        else{
+                            fab.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_clear));
+
+                        }
+                    }
+                }
+            }
+        });
+        floatingSearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
+            @Override
+            public void onActionMenuItemSelected(MenuItem item) {
+                Toast.makeText(getContext(), "Filtering " +item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                defaultId = item.getItemId();
+            }
+        });
 
     }
 

@@ -38,9 +38,15 @@ public class MarketFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private itemInteractionListener mListener;
+
     private int defaultId = R.id.sort_commodity;
     public MarketFragment() {
 
+    }
+
+    public interface floatingSearchBarListenrer
+    {
+        public void configureSearch();
     }
 
     @Override
@@ -74,61 +80,10 @@ public class MarketFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
-        FloatingSearchView floatingSearchView = (FloatingSearchView) getActivity().findViewById(R.id.floating_search_view);
-        floatingSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
-            @Override
-            public void onSearchTextChanged(String oldQuery, String newQuery) {
-                String query = newQuery.toLowerCase();
-                final ArrayList<DataModel> filteredList = new ArrayList<DataModel>();
-                if(query.isEmpty() || query.trim().isEmpty())
-                {
-                    filteredList.addAll(mResponseList);
-                }
-                else {
-                    for (DataModel el : mResponseList) {
-                            String query_field = el.mcommodity;
-                        switch (defaultId)
-                        {
-                            case R.id.sort_commodity :
-                                   query_field = el.mcommodity;
-                                  break;
-                            case  R.id.sort_district:
-                                  query_field = el.mdistrict;
-                                  break;
-                            case R.id.sort_state:
-                                  query_field = el.mstate;
-                                   break;
-                            default:
-                                  query_field = el.mcommodity;
-                        }
-                        if (query_field.toLowerCase().contains(query)) {
-                            filteredList.add(el);
-                        }
-                        mAdapter = new AdvancedAdapter(filteredList, mListener, getContext());
-                        mRecyclerView.setAdapter(mAdapter);
-                        FloatingActionButton fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
-                        if(mAdapter.getItemCount() > 0) {
-                            fab.animate().rotation(0).start();
-                            fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_check));
-                        }
-                        else{
-                            fab.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_clear));
 
-                        }
-                    }
-                }
-            }
-        });
         mResponseList = new ArrayList<DataModel>();
 
-        floatingSearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
-            @Override
-            public void onActionMenuItemSelected(MenuItem item) {
-                Toast.makeText(getContext(), "Filtering " +item.getTitle(), Toast.LENGTH_SHORT).show();
 
-                defaultId = item.getItemId();
-            }
-        });
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Market Prices");
         Ion.with(getContext()).load("https://data.gov.in/api/datastore/resource.json?resource_id=9ef84268-d588-465a-a308-a864a43d0070&api-key=533060153c848cf636069b6cbcb3e841").
                 asJsonObject().setCallback(new FutureCallback<JsonObject>() {
@@ -168,6 +123,60 @@ public class MarketFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FloatingSearchView floatingSearchView = (FloatingSearchView) getActivity().findViewById(R.id.floating_search_view);
+        floatingSearchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
+            @Override
+            public void onSearchTextChanged(String oldQuery, String newQuery) {
+                String query = newQuery.toLowerCase();
+                final ArrayList<DataModel> filteredList = new ArrayList<DataModel>();
+                if(query.isEmpty() || query.trim().isEmpty())
+                {
+                    filteredList.addAll(mResponseList);
+                }
+                else {
+                    for (DataModel el : mResponseList) {
+                        String query_field = el.mcommodity;
+                        switch (defaultId)
+                        {
+                            case R.id.sort_commodity :
+                                query_field = el.mcommodity;
+                                break;
+                            case  R.id.sort_district:
+                                query_field = el.mdistrict;
+                                break;
+                            case R.id.sort_state:
+                                query_field = el.mstate;
+                                break;
+                            default:
+                                query_field = el.mcommodity;
+                        }
+                        if (query_field.toLowerCase().contains(query)) {
+                            filteredList.add(el);
+                        }
+                        mAdapter = new AdvancedAdapter(filteredList, mListener, getContext());
+                        mRecyclerView.setAdapter(mAdapter);
+                        FloatingActionButton fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+                        if(mAdapter.getItemCount() > 0) {
+                            fab.animate().rotation(0).start();
+                            fab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_check));
+                        }
+                        else{
+                            fab.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.ic_clear));
+
+                        }
+                    }
+                }
+            }
+        });
+        floatingSearchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
+            @Override
+            public void onActionMenuItemSelected(MenuItem item) {
+                Toast.makeText(getContext(), "Filtering " +item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                defaultId = item.getItemId();
+            }
+        });
+
     }
 
     public interface itemInteractionListener{
