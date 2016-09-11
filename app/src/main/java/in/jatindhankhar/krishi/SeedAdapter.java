@@ -23,11 +23,14 @@ public class SeedAdapter extends RecyclerView.Adapter<SeedAdapter.ViewHolder> {
 
     private ArrayList<SeedModel> dataSet;
     private Context mContext;
+    private final SeedFragment.seeditemInteractionListener mListener;
 
-    public SeedAdapter(ArrayList<SeedModel> data,Context context)
+    public SeedAdapter(ArrayList<SeedModel> data,Context context,SeedFragment.seeditemInteractionListener seeditemInteractionListener)
     {
         dataSet = data;
         mContext = context;
+        mListener = seeditemInteractionListener;
+
 
     }
     @Override
@@ -38,7 +41,7 @@ public class SeedAdapter extends RecyclerView.Adapter<SeedAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(SeedAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final SeedAdapter.ViewHolder holder, final int position) {
         //holder.companyName.setText(dataSet.get(position).companyDetails.getName());
         //holder.productName.setText(dataSet.get(position).cropDetails.getCropNames());
 
@@ -70,6 +73,12 @@ public class SeedAdapter extends RecyclerView.Adapter<SeedAdapter.ViewHolder> {
             //holder.mNumber.setAutoLinkMask(Linkify.PHONE_NUMBERS);
         }
         holder.mAuthorityType.setText(dataSet.get(position).licenseDetails.getMembership());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.seeditemInteraction(dataSet.get(position));
+            }
+        });
      //   holder.nameImage.setImageDrawable(drawable);
     }
 
