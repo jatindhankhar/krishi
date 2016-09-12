@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -119,6 +120,7 @@ public class SeedFragment extends Fragment {
         mResponseList = new ArrayList<SeedModel>();
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(llm);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Seed Dealers");
         Ion.with(getContext()).load("http://krishi.jatindhankhar.in/seeds").asJsonArray().setCallback(
 
                 new FutureCallback<JsonArray>() {

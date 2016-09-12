@@ -4,33 +4,22 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/basket"
-            android:title="Market Prices" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_seeds"
             android:icon="@drawable/seed_bubble"
             android:title="Seeds" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_market"
+            android:icon="@drawable/basket"
+            android:title="Market Prices" />
+        <item
+            android:id="@+id/nav_coldstore"
             android:icon="@drawable/cold_store"
             android:title="Cold Storage" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_scanner"
             android:icon="@drawable/barcode_scan"
             android:title="Scan Aadhar" />
     </group>
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+
 
 </menu>
