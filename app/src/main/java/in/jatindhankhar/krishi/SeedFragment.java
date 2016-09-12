@@ -1,6 +1,7 @@
 package in.jatindhankhar.krishi;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -146,5 +147,22 @@ public class SeedFragment extends Fragment {
 
     public interface seeditemInteractionListener{
         void seeditemInteraction(SeedModel seedModel);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof seeditemInteractionListener) {
+            mListener = (seeditemInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 }

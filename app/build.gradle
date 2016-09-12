@@ -32,6 +32,9 @@ dependencies {
     // compile 'jp.wasabeef:recyclerview-animators:2.2.4'
 
 
+    
+
+
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.koushikdutta.ion:ion:2.+'
@@ -41,5 +44,4 @@ dependencies {
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.github.arimorty:floatingsearchview:2.0.3'
     compile 'com.journeyapps:zxing-android-embedded:3.3.0'
-
 }

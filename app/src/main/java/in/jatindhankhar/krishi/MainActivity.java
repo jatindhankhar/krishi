@@ -28,13 +28,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener,ColdStoreFragment.OnFragmentInteractionListener,MarketFragment.floatingSearchBarListenrer {
+        implements NavigationView.OnNavigationItemSelectedListener,MarketFragment.itemInteractionListener,ColdStoreFragment.OnFragmentInteractionListener,MarketFragment.floatingSearchBarListenrer,ScannerFragment.OnFragmentInteractionListener,SeedFragment.seeditemInteractionListener {
     private Button button;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         {
             Fragment fragment = null;
             Class fragmentClass= null;
+            if(fragmentClass == null || fragmentClass == ScannerFragment.class)
             fragmentClass = MarketFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
@@ -205,23 +207,28 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = null;
         Class fragmentClass = MarketFragment.class;
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_market) {
             fragmentClass = MarketFragment.class;
         }
-        else if (id == R.id.nav_gallery){
+        else if (id == R.id.nav_seeds){
             fragmentClass = SeedFragment.class;
         }
-        else if(id == R.id.nav_slideshow)
+        else if(id == R.id.nav_coldstore)
         {
             fragmentClass = ColdStoreFragment.class;
+        }
+        else if(id == R.id.nav_scanner){
+            fragmentClass = ScannerFragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -242,6 +249,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void configureSearch() {
+
+    }
+
+    @Override
+    public void onBarCodeInteraction() {
+
+    }
+
+    @Override
+    public void seeditemInteraction(SeedModel seedModel) {
 
     }
 }

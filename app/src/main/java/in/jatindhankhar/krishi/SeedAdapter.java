@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,8 @@ public class SeedAdapter extends RecyclerView.Adapter<SeedAdapter.ViewHolder> {
             //holder.mNumber.setAutoLinkMask(Linkify.PHONE_NUMBERS);
         }
         holder.mAuthorityType.setText(dataSet.get(position).licenseDetails.getMembership());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        if(holder.mView == null) Log.d("Yolopad","We got null situation");
+        holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.seeditemInteraction(dataSet.get(position));
@@ -99,12 +101,13 @@ public class SeedAdapter extends RecyclerView.Adapter<SeedAdapter.ViewHolder> {
         TextView mDistrict;
         ImageView mCompanyNameIcon;
         ImageView mPhoneIcon;
-
+        final View mView;
         public ViewHolder(View itemView) {
             super(itemView);
           //  productName = (TextView) itemView.findViewById(R.id.product_type);
             //companyName = (TextView) itemView.findViewById(R.id.company_name);
             //nameImage = (ImageView) itemView.findViewById(R.id.name_image);
+            this.mView = itemView;
             mPhoneNumber = (TextView) itemView.findViewById(R.id.phone_number);
             mPersoName = (TextView) itemView.findViewById(R.id.person_name);
             //mAddress = (TextView) itemView.findViewById(R.id.address);
